@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Company</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Công ty</h3>
+        </div>
+        <div class="box-body" ng-controller="CompanyController">
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Tên công ty</label>
+                        <input type="text" placeholder="Nhập tên  công ty" ng-model="name" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" placeholder="Nhập địa chỉ" ng-model="address" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" placeholder="Nhập số điện thoại" ng-model="phone" class="form-control input-sm">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-sm" id="btnSave" ng-click="updateCus()" ng-show="(roleMenu.IsEdit) && !isUpdate"><i class="fa fa-check"></i> Cập nhật</button>
+                        <button class="btn btn-primary btn-sm" ng-click="addCompany()" ng-show="(roleMenu.IsAdd) && isUpdate"><i class="fa fa-plus-circle"></i> Thêm mới</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Danh sách công ty</h2>
+                    <table id="tblCus" class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th>STT</th>
+                                <th>Tên công ty</th>
+                                <th>Địa chỉ</th>
+
+                                <th>Số điện thoại</th>
+
+                                <th>Công cụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="x in lstCus | itemsPerPage: 5">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.Name}}</td>
+                                <td>{{x.Address}}</td>
+
+                                <td>{{x.Phone}}</td>
+
+                                <td>
+                                    <span ng-click="editCus(x)" ng-show="(roleMenu.IsEdit)"><img alt=" sửa" src="~/images/edit.png"></span>
+                                    <span ng-click="deleteCus(x.Id)" ng-show="(roleMenu.IsDelete)"><img alt=" xóa" src="~/images/delete.png"></span>
+                                </td>
+                            </tr>
+                    </table>
+                    <dir-pagination-controls boundary-links="true"
+                                             direction-links="true">
+                    </dir-pagination-controls>
+                </div>
+
+
+
+
+            </div>
+            <div class="bs-example">
+                <div class="btn-toolbar text-center">
+                    <div class="btn-group btn-group-sm" id="pageAsign">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+</body>
+</html>

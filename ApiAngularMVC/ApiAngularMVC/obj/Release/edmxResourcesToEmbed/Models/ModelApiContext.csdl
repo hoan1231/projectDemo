@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoApiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="aspnet_User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="CompaID" Type="Guid" />
+  </EntityType>
+  <EntityType Name="Cat_Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CatId" Type="Guid" Nullable="false" />
+    <Property Name="CompanyId" Type="Guid" Nullable="false" />
+    <Property Name="CatNumber" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="CatName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CatCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CatTypeId" Type="Guid" Nullable="false" />
+    <Property Name="MatCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CatManufacturer" Type="Guid" />
+    <Property Name="RetailPrice" Type="Double" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PurchasePrice" Type="Double" />
+    <Property Name="IsRecyclebin" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Tag" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="SortIndex" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CatManufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CatType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CatTypeName" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Custormer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="Boolean" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="0" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="SaleInvoice" Relationship="Self.FK_SaleInvoice_Custormer" FromRole="Custormer" ToRole="SaleInvoice" />
+  </EntityType>
+  <EntityType Name="DetailInvoiceImport">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="ImportId" Type="Guid" />
+    <Property Name="CatId" Type="Guid" />
+    <Property Name="CatNumberImport" Type="Int32" />
+    <Property Name="PlaceReceive" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="SumMoney" Type="Double" />
+    <Property Name="VAT" Type="Int32" />
+    <Property Name="Decription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="DetailInvoiceSale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="SaleId" Type="Guid" />
+    <Property Name="CatId" Type="Guid" />
+    <Property Name="PlaceReceive" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CatNumberSale" Type="Int32" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="SumMoney" Type="Double" />
+    <Property Name="VAT" Type="Int32" />
+    <Property Name="Decription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="HistoryLogin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="DateLogin" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompayId" Type="Guid" />
+  </EntityType>
+  <EntityType Name="HistoryMoveCat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CatId" Type="Guid" />
+    <Property Name="FromCompanyId" Type="Guid" />
+    <Property Name="ToCompanyId" Type="Guid" />
+    <Property Name="NumberCat" Type="Int32" />
+    <Property Name="ToAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StatusSend" Type="Int32" />
+    <Property Name="Decription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Tag" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ImportInvoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyId" Type="Guid" />
+    <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SupplierId" Type="Guid" />
+    <Property Name="SumMoney" Type="Double" />
+    <Property Name="UserId" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Material">
+    <Key>
+      <PropertyRef Name="MatCode" />
+    </Key>
+    <Property Name="MatCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MatName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MenuNew">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="Guid" Nullable="false" />
+    <Property Name="MenuName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MenuUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="Guid" />
+    <Property Name="OrderIndex" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnable" Type="Boolean" />
+    <Property Name="Action" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Icon" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="RoleInMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="RoleId" Type="Guid" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="MenuId" Type="Guid" />
+    <Property Name="IsShow" Type="Boolean" />
+    <Property Name="IsAdd" Type="Boolean" />
+    <Property Name="IsEdit" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="IsExport" Type="Boolean" />
+    <Property Name="IsPrint" Type="Boolean" />
+    <Property Name="IsEnable" Type="Boolean" />
+    <Property Name="IsDisable" Type="Boolean" />
+    <Property Name="IsAll" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Guid" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnable" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="SaleInvoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CustormerID" Type="Guid" />
+    <Property Name="CompanyId" Type="Guid" />
+    <Property Name="SumMoney" Type="Double" />
+    <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Guid" />
+    <NavigationProperty Name="Custormer" Relationship="Self.FK_SaleInvoice_Custormer" FromRole="SaleInvoice" ToRole="Custormer" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserInRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="RoleId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_SaleInvoice_Custormer">
+    <End Role="Custormer" Type="Self.Custormer" Multiplicity="0..1" />
+    <End Role="SaleInvoice" Type="Self.SaleInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custormer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaleInvoice">
+        <PropertyRef Name="CustormerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DemoApiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="aspnet_User" EntityType="Self.aspnet_User" />
+    <EntitySet Name="Cat_Company" EntityType="Self.Cat_Company" />
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="CatManufacturer" EntityType="Self.CatManufacturer" />
+    <EntitySet Name="CatType" EntityType="Self.CatType" />
+    <EntitySet Name="Company" EntityType="Self.Company" />
+    <EntitySet Name="Custormer" EntityType="Self.Custormer" />
+    <EntitySet Name="DetailInvoiceImport" EntityType="Self.DetailInvoiceImport" />
+    <EntitySet Name="DetailInvoiceSale" EntityType="Self.DetailInvoiceSale" />
+    <EntitySet Name="HistoryLogin" EntityType="Self.HistoryLogin" />
+    <EntitySet Name="HistoryMoveCat" EntityType="Self.HistoryMoveCat" />
+    <EntitySet Name="ImportInvoice" EntityType="Self.ImportInvoice" />
+    <EntitySet Name="Material" EntityType="Self.Material" />
+    <EntitySet Name="MenuNew" EntityType="Self.MenuNew" />
+    <EntitySet Name="RoleInMenu" EntityType="Self.RoleInMenu" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="SaleInvoice" EntityType="Self.SaleInvoice" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+    <EntitySet Name="UserInRole" EntityType="Self.UserInRole" />
+    <AssociationSet Name="FK_SaleInvoice_Custormer" Association="Self.FK_SaleInvoice_Custormer">
+      <End Role="Custormer" EntitySet="Custormer" />
+      <End Role="SaleInvoice" EntitySet="SaleInvoice" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

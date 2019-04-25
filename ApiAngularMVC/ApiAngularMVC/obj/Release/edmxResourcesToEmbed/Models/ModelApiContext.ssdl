@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoApiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aspnet_User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Password" Type="varchar" MaxLength="500" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="500" />
+    <Property Name="CompanyId" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="IsDelete" Type="bit" />
+    <Property Name="CompaID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Cat_Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CatId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CatNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CatName" Type="nvarchar" MaxLength="500" />
+    <Property Name="CatCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CatTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MatCode" Type="nvarchar" MaxLength="200" />
+    <Property Name="CatManufacturer" Type="uniqueidentifier" />
+    <Property Name="RetailPrice" Type="float" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PurchasePrice" Type="float" />
+    <Property Name="IsRecyclebin" Type="bit" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="200" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="SortIndex" Type="int" />
+  </EntityType>
+  <EntityType Name="CatManufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="400" />
+    <Property Name="IsDelete" Type="bit" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="300" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CatType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CatTypeName" Type="nvarchar" MaxLength="1024" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Phone" Type="nchar" MaxLength="15" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Custormer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="BirthDay" Type="date" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsDelete" Type="bit" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="DetailInvoiceImport">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ImportId" Type="uniqueidentifier" />
+    <Property Name="CatId" Type="uniqueidentifier" />
+    <Property Name="CatNumberImport" Type="int" />
+    <Property Name="PlaceReceive" Type="nvarchar" MaxLength="500" />
+    <Property Name="Price" Type="float" />
+    <Property Name="SumMoney" Type="float" />
+    <Property Name="VAT" Type="int" />
+    <Property Name="Decription" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DetailInvoiceSale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SaleId" Type="uniqueidentifier" />
+    <Property Name="CatId" Type="uniqueidentifier" />
+    <Property Name="PlaceReceive" Type="nvarchar" MaxLength="500" />
+    <Property Name="CatNumberSale" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="SumMoney" Type="float" />
+    <Property Name="VAT" Type="int" />
+    <Property Name="Decription" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="HistoryLogin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="25" />
+    <Property Name="DateLogin" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompayId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="HistoryMoveCat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CatId" Type="uniqueidentifier" />
+    <Property Name="FromCompanyId" Type="uniqueidentifier" />
+    <Property Name="ToCompanyId" Type="uniqueidentifier" />
+    <Property Name="NumberCat" Type="int" />
+    <Property Name="ToAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="StatusSend" Type="int" />
+    <Property Name="Decription" Type="nvarchar" MaxLength="500" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ConfirmedBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ConfirmedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ImportInvoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyId" Type="uniqueidentifier" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="SupplierId" Type="uniqueidentifier" />
+    <Property Name="SumMoney" Type="float" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Material">
+    <Key>
+      <PropertyRef Name="MatCode" />
+    </Key>
+    <Property Name="MatCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="MatName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MenuNew">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="250" />
+    <Property Name="MenuUrl" Type="varchar" MaxLength="512" />
+    <Property Name="ParentId" Type="uniqueidentifier" />
+    <Property Name="OrderIndex" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsEnable" Type="bit" />
+    <Property Name="Action" Type="varchar" MaxLength="10" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="RoleInMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" />
+    <Property Name="MenuId" Type="uniqueidentifier" />
+    <Property Name="IsShow" Type="bit" />
+    <Property Name="IsAdd" Type="bit" />
+    <Property Name="IsEdit" Type="bit" />
+    <Property Name="IsDelete" Type="bit" />
+    <Property Name="IsExport" Type="bit" />
+    <Property Name="IsPrint" Type="bit" />
+    <Property Name="IsEnable" Type="bit" />
+    <Property Name="IsDisable" Type="bit" />
+    <Property Name="IsAll" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="256" />
+    <Property Name="IsEnable" Type="bit" />
+  </EntityType>
+  <EntityType Name="SaleInvoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CustormerID" Type="uniqueidentifier" />
+    <Property Name="CompanyId" Type="uniqueidentifier" />
+    <Property Name="SumMoney" Type="float" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsDelete" Type="bit" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserInRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_SaleInvoice_Custormer">
+    <End Role="Custormer" Type="Self.Custormer" Multiplicity="0..1" />
+    <End Role="SaleInvoice" Type="Self.SaleInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Custormer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaleInvoice">
+        <PropertyRef Name="CustormerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DemoApiModelStoreContainer">
+    <EntitySet Name="aspnet_User" EntityType="Self.aspnet_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Company" EntityType="Self.Cat_Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CatManufacturer" EntityType="Self.CatManufacturer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CatType" EntityType="Self.CatType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Custormer" EntityType="Self.Custormer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailInvoiceImport" EntityType="Self.DetailInvoiceImport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailInvoiceSale" EntityType="Self.DetailInvoiceSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HistoryLogin" EntityType="Self.HistoryLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HistoryMoveCat" EntityType="Self.HistoryMoveCat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImportInvoice" EntityType="Self.ImportInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuNew" EntityType="Self.MenuNew" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleInMenu" EntityType="Self.RoleInMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SaleInvoice" EntityType="Self.SaleInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInRole" EntityType="Self.UserInRole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SaleInvoice_Custormer" Association="Self.FK_SaleInvoice_Custormer">
+      <End Role="Custormer" EntitySet="Custormer" />
+      <End Role="SaleInvoice" EntitySet="SaleInvoice" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

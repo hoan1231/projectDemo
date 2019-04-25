@@ -1,0 +1,134 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/build.css" rel="stylesheet" />
+    <title>AddMember</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Thêm mới thành viên</h3>
+        </div>
+        <div class="box-body" ng-controller="AddMemberController">
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input type="text" placeholder="Nhập tên đăng nhập" ng-model="m.name" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" placeholder="Nhập họ tên" ng-model="m.fullName" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Công ty</label>
+                        <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="Company">
+                            <option value="">-- Chọn công ty --</option>
+                            <option ng-repeat="x in lstCompany" value="{{x.Id}}">{{x.Name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Nhập Email</label>
+                        <input type="text" placeholder="Nhập email" ng-model="m.Email" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Nhập địa chỉ</label>
+                        <input type="text" placeholder="Nhập địa chỉ" ng-model="m.Address" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Nhập số điện thoại</label>
+                        <input type="text" placeholder="Nhập số điện thoại" ng-model="m.Phone" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" placeholder="Nhập mật khẩu" ng-model="m.pass" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Nhập lại mật khẩu</label>
+                        <input type="password" placeholder="Nhập lại mật khẩu" ng-model="m.repass" class="form-control input-sm">
+                    </div>
+                </div>
+                @*<div class="form-group">
+                        <br />
+                        <div class="radio radio-info radio-inline">
+                            <input type="radio" id="primary1" name="primary" ng-model="m.role" value="e16e2c31-3823-476c-b228-793ea93d9742">
+                            <label for="primary1">Admin</label>
+                        </div>
+                        <div class="radio radio-info radio-inline">
+                            <input type="radio" id="primary2" ng-model="m.role" name="primary" checked="checked" value="3ea6081c-93e4-419b-9d12-f5f70088e9de">
+                            <label for="primary1">Agent</label>
+                        </div>
+                        <div class="radio radio-info radio-inline">
+                            <input type="radio" id="primary3" name="primary" ng-model="m.role" value="61864981-7b49-452c-bde2-f3ffeeb565c1">
+                            <label for="primary1">Supervisor</label>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>File đính kèm </label>
+                        <div class="input-group">
+                            <input id="fileupload" class="form-control input-sm" accept=".xlsx,.xls" type="file" />
+                            <div class="input-group-addon btn btn-primary" id="btUpLoad" ng-click="addMember()">
+                                
+                                <i class="fa fa-cloud-upload"></i>&nbsp Thêm mới
+                            </div>
+                            <div class="input-group-addon btn btn-primary" id="btEdit"ng-click="importFile()">
+                                <i class="fa fa-edit"></i>&nbsp Import file
+                            </div>
+                            <div class="input-group-addon btn btn-primary" id="btTemp"ng-click="downloadFile()">
+                                <i class="fa fa-cloud-download"></i>&nbsp Tải mẫu file
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+
+
+                @*<div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-sm" ng-click="addMember()" ng-show="(roleMenu.IsAdd)"><i class="fa fa-plus-circle"></i> Thêm mới</button>
+                            <input type="button" class="btn btn-primary btn-sm" style="width: 80px" value="Refresh" ng-click="refresh()">
+                            <a href="#!ListMember" style="font-size:14px;">Danh sách tài khoản</a>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="bs-example">
+                    <div class="btn-toolbar text-center">
+                        <div class="btn-group btn-group-sm" id="pageAsign">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>

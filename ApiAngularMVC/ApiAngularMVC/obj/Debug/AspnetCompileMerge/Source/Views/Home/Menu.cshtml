@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/build.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Hệ thống menu</h3>
+        </div>
+        <div class="box-body" ng-controller="MenuCtrl">
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Nhóm menu</label>
+                        <select id="ddlMenu" class="form-control input-sm select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true" ng-model="cboMenu" ng-change="changeMenu()">
+                            <option value="">-Chọn-</option>
+                            <option ng-repeat="x in menu" value="{{x.MenuId}}">{{x.MenuName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Tên menu</label>
+                        <input type="text" placeholder="Nhập tên menu" ng-model="m.MenuName" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Menu url</label>
+                        <input type="text" placeholder="Nhập url" ng-model="m.MenuUrl" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input type="text" placeholder="Nhập ghi chú" ng-model="m.Note" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Vị trí</label>
+                        <input type="text" ng-model="m.OrderIndex" placeholder="Nhập vị trí" class="form-control input-sm" onkeypress="return isNumberKey(event)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <br />
+                        <span class="checkbox checkbox-success styleCheckBoxMenu">
+                            <input ng-model="m.IsEnable" class="styled" type="checkbox">
+                            <label for="chkEnable">Hoạt động</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-sm" id="btnSave" ng-click="updateMenu()" ng-show="(roleMenu.IsEdit || roleMenu.IsAll) && !isAdd"><i class="fa fa-check"></i> Cập nhật</button>
+                        <button class="btn btn-primary btn-sm" ng-click="addMenu(m)" ng-show="(roleMenu.IsAdd || roleMenu.IsAll) && isAdd"><i class="fa fa-plus-circle"></i> Thêm mới</button>
+
+                           <input type="button"  class="btn btn-primary btn-sm" style="width: 80px" value="Hủy">
+                    </div>
+                </div>
+            </div>
+            <table id="tblListMenu" class="table table-bordered table-hover">
+                <thead class="scroll-table">
+                    <tr class="success">
+                        <th>STT</th>
+                        <th>Tên menu</th>
+                        <th>Url</th>
+                        <th>Vị trí</th>
+                        <th>Nhóm menu</th>
+                        <th>Công cụ</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="x in tblMenu">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.MenuName}}</td>
+                    <td>{{x.MenuUrl}}</td>
+                    <td>{{x.OrderIndex}}</td>
+                    <td>{{cboMenu}}</td>
+                    <td>
+                        <span ng-click="editMenu(x)" ng-show="(roleMenu.IsEdit)"><img alt=" sửa" src="~/images/edit.png"></span>
+                        <span ng-click="deleteMenu(x.MenuId)" ng-show="(roleMenu.IsDelete)"><img alt=" xóa" src="~/images/delete.png"></span>
+
+                         </tr>
+            </table>
+            <div class="bs-example">
+                <div class="btn-toolbar text-center">
+                    <div class="btn-group btn-group-sm" id="pageAsign">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+

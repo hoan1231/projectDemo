@@ -1,0 +1,191 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Order Sale</title>
+    <link rel="stylesheet" href="~/Content/bower_components/select2/dist/css/select2.min.css">
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Tạo đơn bán hàng hàng</h3>
+        </div>
+        <div class="box-body" ng-controller="OrderSaleController">
+
+            <!-- Modal -->
+
+            <div class="row">
+
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Chọn chi nhánh</label>
+                        <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="CompanyId" ng-change="changeCom()">
+                         
+                            <option ng-repeat="x in lstCompany" value="{{x.Id}}">{{x.Name}}</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Nhập nơi bán hàng</label>
+                        <input type="text" placeholder="Nhập nơi bán hàng" ng-model="PlaceReceive" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Ngày bán</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="txtDate">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Chọn sản phẩm</label>
+                        <select class="form-control input-sm" ng-model="a.CatId" ng-change="changeCate()">
+                            <option value="">--Chọn--</option>
+                            <option ng-repeat="x in lstCat" value="{{x.ID}}">{{x.CatName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 col-lg-3">
+                    <div class="form-group">
+                        <label>Chọn khách hàng</label>
+                        <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="CustomerId">
+                            <option value="">-Chọn-</option>
+                            <option ng-repeat="x in lstCustomer" value="{{x.Id}}">{{x.Name}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                        <label>File đính kèm </label>
+                        <div class="input-group">
+                            <input id="fileupload" class="form-control input-sm" accept=".xlsx,.xls" type="file" />
+                            <div class="input-group-addon btn btn-primary" id="btUpLoad" ng-click="importFile()">
+                                
+                                <i class="fa fa-cloud-upload"></i>&nbsp ImportFile
+                            </div>
+                           
+                            <div class="input-group-addon btn btn-primary" id="btTemp"ng-click="downloadFile()">
+                                <i class="fa fa-cloud-download"></i>&nbsp Tải mẫu file
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th style="width:17%;">Mã sản phẩm</th>
+                                <th style="width:33%;">Tên sản phẩm</th>
+                                <th style="width:10%;">Số lượng</th>
+                                <th style="width:13%;">Đơn giá</th>
+                                <th style="width:11%;">Thuế(%)</th>
+                                <th style="width:12%;">Thành tiền</th>
+                                <th style="width:4%;"></th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="x in lstCategory">
+                            <td>{{x.Category.CatCode}}</td>
+                            <td>{{x.Category.CatName}}</td>
+                            <td>
+                                <input type="number" class="form-control form-control-input-popup col" min="0" ng-model="x.SoLuong" ng-change="changePriceSL($index)">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-input-popup col-2" ng-model="x.Category.Price" ng-change="changePrice()">
+                            </td>
+                            <td><input type="number" class="form-control form-control-input-popup col" ng-model="x.Thue" ng-change="changePrice()"></td>
+                            <td>{{x.SoLuong*x.Category.Price}}</td>
+                            <td>
+                                <span ng-click="deleteCategory($index)"><i class="fa fa-fw fa-trash-o"></i></span>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div class="bs-example">
+                        <div class="btn-toolbar text-center">
+                            <div class="btn-group btn-group-sm" id="pageAsign">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" placeholder="Tag" ng-model="c.CatName" class="form-control"></br>
+                    <textarea class="form-control" rows="3" placeholder="Ghi chú" ng-model="Decription"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <div class="row">
+                        <div class="col-md-9" style="font-size: 17px; padding-bottom: 4px;">
+                            Số lượng
+                        </div>
+                        <div class="col-md-3 float-right" style="font-size:17px;">
+                            {{sumCount}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9" style="font-size: 17px; padding-bottom: 4px;">
+                            Tiền hàng
+                        </div>
+                        <div class="col-md-3 float-right" style="font-size:17px;">
+                            {{sumPrice}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9" style="font-size: 17px; padding-bottom: 4px;">
+                            VAT
+                        </div>
+                        <div class="col-md-3 float-right" style="font-size:17px;">
+                            {{sumVat}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9" style="font-size: 17px; padding-bottom: 4px;">
+                            <b>Thành tiền</b>
+                        </div>
+                        <div class="col-md-3 float-right" style="font-size:17px;">
+                            <b>{{sumPrice+sumVat}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12" style="background:#bbccdd; margin:5px;padding:24px;">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+
+                        <input type="button" class="btn btn-primary btn-sm" style="width: 103px;height: 41px;font-size: 14px; margin-left:80px;" value="Lưu đơn hàng" ng-click="saveOrder()">
+                        <input type="button" class="btn btn-primary btn-sm" style="width: 103px;height: 41px;font-size: 14px;" value="Hủy">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

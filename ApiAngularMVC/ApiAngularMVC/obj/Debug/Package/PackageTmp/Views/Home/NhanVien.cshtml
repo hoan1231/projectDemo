@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/Angular/AngularRoute.js"></script>
+    <script src="~/Scripts/Angular/NhanVien.js"></script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="myctrl">
+        <div style="margin-top:10px;">
+            Search <select ng-model="droplst" ng-change="changedrop()">
+                <option>--Chon--</option>
+                <option ng-repeat="b in emp">{{b.TenNhanVien}}</option>
+            </select>
+        </div>
+        <button style="margin-top:20px;" ng-click="showAll()"> ShowAll</button>
+        <table border="1px" style="margin-top:20px">
+            <tr>
+                <th>MaNhanVien</th>
+                <th>TenNhanVien</th>
+                <th>DiaChi</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr data-ng-repeat="x in nhanviens">
+                <td>{{x.MaNhanVien}}</td>
+                <td>{{x.TenNhanVien}}</td>
+                <td>{{x.DiaChi}}</td>
+                <td><button ng-click="updateclick1(x)">Edit</button></td>
+                <td><button ng-click="delete(x.MaNhanVien)">Delete</button></td>
+            </tr>
+        </table>
+        <input ng-click="Add()" type="submit" value="AddEmployee" />
+
+        <div ng-hide="isAdd">
+            <table>
+                <tr>
+                    <td> MaNhanVien</td>
+                    <td> <input type="text" ng-model="nv.MaNhanVien" /></td>
+                </tr>
+                <tr>
+                    <td> TenNhanVien</td>
+                    <td> <input type="text" ng-model="nv.TenNhanVien" /></td>
+                </tr>
+                <tr>
+                    <td> Diachi</td>
+                    <td> <input type="text" ng-model="nv.DiaChi" /></td>
+                </tr>
+            </table>
+            <input type="submit" value="Save" ng-click="insert(nv)" />
+        </div>
+        <div ng-hide="isUpdate">
+            <table>
+                <tr>
+                    <td> MaNhanVien</td>
+                    <td> <input type="text" ng-model="nv1.MaNhanVien" id="mnv" /></td>
+                </tr>
+                <tr>
+                    <td> TenNhanVien</td>
+                    <td> <input type="text" ng-model="nv1.TenNhanVien" /></td>
+                </tr>
+                <tr>
+                    <td> Diachi</td>
+                    <td> <input type="text" ng-model="nv1.DiaChi" /></td>
+                </tr>
+            </table>
+            <input type="submit" value="Update" ng-click="updateclick(nv1)" />
+        </div>
+
+
+
+    </div>
+</body>
+</html>
+
+
+
+

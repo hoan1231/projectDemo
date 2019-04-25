@@ -1,0 +1,295 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Categorys</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><link href="~/Content/build.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#modalType").draggable();
+        });
+    </script>
+
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Danh mục hàng hóa</h3>
+        </div>
+        <div class="box-body" ng-controller="CategoryController">
+           
+            <!-- Modal -->
+            <span ng-hide="isInsert">
+                <div class="row">
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Mã sản phẩm</label>
+                            <input type="text" placeholder="Nhập mã sản phẩm" ng-model="c.CatCode" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            <input type="text" placeholder="Nhập tên sản phẩm" ng-model="c.CatName" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="input-group input-group-sm">
+                            <label>Loại hàng</label>
+                            <select id="ddlType" class="form-control input-sm select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true" ng-model="c.CatTypeId">
+                                <option value="">-Chọn-</option>
+                                <option ng-repeat="x in lstType" value="{{x.Id}}">{{x.CatTypeName}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat" style=" margin-top: 33%;" data-backdrop="false" data-toggle="modal" data-target="#modalType">Thêm mới</button>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="input-group input-group-sm">
+                            <label>Chất liệu</label>
+                            <select id="ddlLabel" class="form-control input-sm select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true" ng-model="c.MatCode">
+                                <option value="">-Chọn-</option>
+                                <option ng-repeat="x in lstMaterial" value="{{x.MatCode}}">{{x.MatName}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat" style=" margin-top: 33%;" data-backdrop="false" data-toggle="modal" data-target="#modalLabel">Thêm mới</button>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="input-group input-group-sm">
+                            <label>Nhãn hiệu</label>
+                            <select id="ddlType" class="form-control input-sm select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true" ng-model="c.CatManufacturer">
+                                <option value="">-Chọn-</option>
+                                <option ng-repeat="x in lstManufacturer" value="{{x.Id}}">{{x.Name}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat" style=" margin-top: 33%;" data-backdrop="false" data-toggle="modal" data-target="#modalManufacturer">Thêm mới</button>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Giá nhập</label>
+                            <input type="text" ng-model="c.PurchasePrice" placeholder="Nhập giá" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Giá bán</label>
+                            <input type="text" ng-model="c.Price" placeholder="Nhập giá bán" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Giá bán lẻ</label>
+                            <input type="text" ng-model="c.RetailPrice" placeholder="Nhập giá bán lẻ" class="form-control input-sm">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Từ khóa</label>
+                            <input type="text" ng-model="c.Tag" placeholder="Nhập từ khóa" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-8 col-lg-6">
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea class="form-control" rows="2" placeholder="Nhập mô tả" ng-model="c.Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-sm" id="btnSave" ng-click="updateCat()" ng-show="(roleMenu.IsEdit) && !isAdd"><i class="fa fa-check"></i> Cập nhật</button>
+                        <button class="btn btn-primary btn-sm" ng-click="addCat(c)" ng-show="(roleMenu.IsAdd) && isAdd"><i class="fa fa-plus-circle"></i> Thêm mới</button>
+
+                         <a ng-click="lstAdd()" style="font-size:15px;" ng-hide="isAdd">Thêm mới sản phẩm</a>
+                         <a ng-click="lstCat()" style="font-size:15px;" ng-hide="!isAdd">Danh sách sản phẩm</a>
+                      
+
+                    </div>
+                </div>
+            </div>
+            <div ng-hide ="isList">
+                <table class="table table-bordered table-hover">
+                    <thead class="scroll-table">
+                        <tr class="success">
+                            <th>STT</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Loại hàng</th>
+                            <th>Nhãn hiệu</th>
+                            <th>Mã chất liệu</th>
+                            <th>Giá nhập</th>
+                            <th>Giá bán</th>
+                            <th>Giá bán lẻ</th>
+                            <th>Mô tả</th>
+                            <th>Công cụ</th>
+                        </tr>
+                    </thead>
+                    <tr dir-paginate="x in lstCategorys | itemsPerPage: 5">
+
+                        <td>{{$index+1}}</td>
+                        <td>{{x.CatName}}</td>
+                        <td>{{x.CatTypeId}}</td>
+                        <td>{{x.CatManufacturer}}</td>
+                        <td>{{x.MatCode}}</td>
+                        <td>{{x.PurchasePrice}}</td>
+                        <td>{{x.Price}}</td>
+                        <td>{{x.RetailPrice}}</td>
+                        <td>{{x.Description}}</td>
+                        <td>
+                            <span ng-click="editCategory(x)" ng-show="(roleMenu.IsEdit)"><img alt=" sửa" src="~/images/edit.png"></span>
+                            <span ng-click="deleteCategory(x.ID)" ng-show="(roleMenu.IsDelete)"><img alt=" xóa" src="~/images/delete.png"></span>
+                         </td>
+                    </tr>
+
+                </table>
+                <dir-pagination-controls boundary-links="true"
+                                         direction-links="true">
+                </dir-pagination-controls>
+            </div>
+            <div class="bs-example">
+                <div class="btn-toolbar text-center">
+                    <div class="btn-group btn-group-sm" id="pageAsign">
+                    </div>
+                </div>
+            </div>
+            <div id="modalType" class="modal fade">
+                <div class="modal-dialog" style="margin-top:6%;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Thêm mới loại hàng</h4>
+
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="ng-pristine ng-valid" name="formGroup1">
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Tên loại hàng
+                                    </label>
+                                    <input type="text" placeholder="Nhập tên loại hàng" class="form-control" name="typename" ng-model="NameType" required>
+                                    <div ng-hide="isValidateType"><font size="2px" color="red"><span ng-hide="formGroup1.typename.$valid">Chưa nhập tên loại hàng</span></font></div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button id="loadpage" type="button" class="btn btn-primary" ng-click="saveType(NameType)">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <div id="modalManufacturer" class="modal fade">
+                <div class="modal-dialog" style="margin-top:6%;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Thêm mới nhãn hiệu</h4>
+
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="ng-pristine ng-valid" name="formGroup1">
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Tên nhãn hiệu
+                                    </label>
+                                    <input type="text" placeholder="Nhập tên nhãn hiệu" class="form-control" name="Manuname" ng-model="NameManufacturer" required>
+                                    <div ng-hide="isValidateManufacturer"><font size="2px" color="red"><span ng-hide="formGroup1.Manuname.$valid">Chưa nhập tên nhãn hiệu</span></font></div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button id="loadpage" type="button" class="btn btn-primary" ng-click="saveManufacturer(NameManufacturer)">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <div id="modalLabel" class="modal fade">
+                <div class="modal-dialog" style="margin-top:6%;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Thêm mới chất liệu</h4>
+
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="ng-pristine ng-valid" name="formGroup">
+                                <div class="form-group">
+                                    <label>Mã chất liệu</label>
+                                    <input type="text" placeholder="Nhập mã chất liệu" ng-model="matCode" name="namecode" class="form-control" required>
+                                    <div ng-hide="isValidateLabel"><font size="2px" color="red"><span ng-hide="formGroup.namecode.$valid">Chưa nhập mã</span></font></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Tên chất liệu
+                                    </label>
+                                    <input type="text" placeholder="Nhập tên chất liệu" class="form-control" name="groupname" ng-model="matName" required>
+                                    <div ng-hide="isValidateLabel"><font size="2px" color="red"><span ng-hide="formGroup.groupname.$valid">Chưa nhập tên chất liệu</span></font></div>
+                                    <div class="form-group">
+                                        <label>Màu</label>
+                                        <input type="text" placeholder="Nhập màu" class="form-control" name="namecolor" ng-model="matColor" required>
+                                        <div ng-hide="isValidateLabel"><font size="2px" color="red"><span ng-hide="formGroup.namecolor.$valid">Chưa nhập màu</span></font></div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button id="loadpage" type="button" class="btn btn-primary" ng-click="saveMaterial()">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+           
+        </div>
+      
+    </div>
+
+  
+</body>
+</html>
+
+
+
+

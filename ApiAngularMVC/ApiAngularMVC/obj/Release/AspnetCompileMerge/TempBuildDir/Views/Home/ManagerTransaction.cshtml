@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ManagerTransaction</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Quản lý đơn hàng</h3>
+        </div>
+        <div class="box-body" ng-controller="ManagerTransactionController">
+
+            <!-- Modal -->
+
+           
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <h3>Danh sách sản phẩm đang chuyển giao đến</h3>
+                    <hr />
+                    <table class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th>Mã vận chuyển</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Vận chuyển từ</th>
+                                <th>Thời gian vận chuyển</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tr dir-paginate="x in lstCat | itemsPerPage: 5">
+                            <td>{{x.a.Id}}</td>
+                            <td>{{x.CatName}}</td>
+                            <td>{{x.a.NumberCat}}</td>
+                            <td>{{x.a.ToAddress}}</td>
+                            <td>{{x.a.CreatedDate.substring(6, 19)| date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                            <td>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" ng-click="saveCat(x.a)">Xác nhận</button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger" ng-click="cancle(x.a)">Hủy bỏ</button>
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </table>
+                    <dir-pagination-controls boundary-links="true"
+                                             direction-links="true">
+                    </dir-pagination-controls>
+                    <div class="bs-example">
+                        <div class="btn-toolbar text-center">
+                            <div class="btn-group btn-group-sm" id="pageAsign">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

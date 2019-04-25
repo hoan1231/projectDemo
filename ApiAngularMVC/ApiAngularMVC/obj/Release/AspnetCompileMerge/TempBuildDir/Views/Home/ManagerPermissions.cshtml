@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ManagerPermissions</title>
+</head>
+<body ng-controller="RoleManagerController">
+    <div id="modal_theme_primary" class="modal fade">
+        <div class="modal-dialog" style="margin-top:6%;">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h6 class="modal-title">Danh sách thành viên</h6>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group pt-15">
+
+                        <table id="tblListMenu" class="table table-bordered table-hover">
+                            <thead class="scroll-table">
+                                <tr class="success">
+                                    <th>STT</th>
+                                    <th>Tên thành viên</th>
+                                    <th>Email</th>
+                                    <th>Tên quyền</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="x in lstUser">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.UserName}}</td>
+                                <td>{{x.Email}}</td>
+                                <td>{{nameRole}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Tạo quyền truy cập</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-2">
+                    <div class="form-group">
+                        <label>
+                            Tên quyền
+                        </label>
+                        <input type="text" placeholder="Nhập tên quyền" ng-model="roleName" class="form-control input-sm">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-2">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="addRole()" ng-hide="!isAdd">Thêm mới</button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="updateRole()" ng-hide="isAdd">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+            <table id="tblRole" width="100%" class="alter table table-bordered table-hover">
+                <tbody>
+                    <tr class="success">
+                        <th width="40">STT</th>
+                        <th width="50%">Tên quyền</th>
+                        <th width="40px">Số lượng</th>
+                        <th width="40px">Chi tiết</th>
+                        <th width="40px">Thiết lập quyền</th>
+                        <th width="40px">Kích hoạt quyền</th>
+                    </tr>
+                </tbody>
+                <tr ng-repeat="x in roles">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.RoleName}}</td>
+                    <td>{{x.SoLuong}}</td>
+                    <td> <span data-toggle="modal" data-backdrop="static" data-target="#modal_theme_primary" title="Chi tiết" ng-click="detailUser(x)"> <img src="/images/view.png" title="Chi tiết"></span></td>
+
+                    <td>
+                        <a href="#!SetPermissions/{{x.RoleName}}" title="Thiết Lập Quyền">
+                            <img alt="Thiết Lập Quyền" src="/images/modules.png">
+                        </a>
+
+                    </td>
+                    <td>
+                        <a  ng-click="activeRole(x)" title="Khóa quyền">
+                            <i ng-if="!x.IsEnable" class="fa fa fa-toggle-off fa-lg"></i>
+                            <i ng-if="x.IsEnable" class="fa fa fa-toggle-on fa-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+            
+
+        </div>
+
+        </div>
+    
+
+</body>
+</html>

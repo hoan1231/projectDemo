@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/build.css" rel="stylesheet" />
+    <title>ReportCategory</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Báo cáo sản phẩm</h3>
+        </div>
+        <div class="box-body" ng-controller="ReportCategoryController">
+            <div class="row">
+
+              
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Từ ngày</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="fromDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Đến ngày</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="toDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-lg-3">
+                        <div class="form-group">
+                            <label>Chọn số lượng bản ghi</label>
+                            <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="count">
+                                <option value="">--Chọn tất cả--</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                    </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="radio radio-info">
+                            <input type="radio" id="primary1" name="primary" ng-model="typeReport" value="1">
+                            <label for="primary1">Mặt hàng bán chạy</label>
+                        </div>
+                        <div class="radio radio-info">
+                            <input type="radio" id="primary2" ng-model="typeReport" name="primary" checked="checked" value="2">
+                            <label for="primary1">Hàng tồn kho</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-sm" style="width: 80px" ng-click="search()" id="btnSearch">Tìm kiếm</button>
+                            <button class="btn btn-warning btn-sm" style="width: 80px" ng-show="roleMenu.IsExport " ng-click="btnExport()" id="btnExcel">Xuất excel</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-12">
+                    
+                        <table class="table table-bordered table-hover">
+                            <thead class="scroll-table">
+                                <tr class="success">
+                                    <th style="text-align:center;">STT</th>
+                                    <th style="text-align:center;">Tên sản phẩm</th>
+                                    
+                                    <th style="text-align:center;">Số lượng tồn kho</th>
+                                    <th style="text-align:center;">Số lượng nhâp</th>
+                                    <th style="text-align:center;">Số lượng bán</th>
+                                    <th style="text-align:center;">Tổng tiền bán</th>
+                                   
+                                </tr>
+                            </thead>
+
+                            <tr dir-paginate="x in lst | itemsPerPage: 10">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.CatName}}</td>
+                                <td>{{x.SLTon}}</td>
+                                <td>{{x.SLNhap}}</td>
+                                <td>{{x.SLBan}}</td>
+                                <td>{{x.TienBan}}</td>
+                                
+                            </tr>
+
+                        </table>
+                        <dir-pagination-controls boundary-links="true"
+                                                 direction-links="true">
+                        </dir-pagination-controls>
+
+                        <div class="bs-example">
+                            <div class="btn-toolbar text-center">
+                                <div class="btn-group btn-group-sm" id="pageAsign">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</body>
+</html>

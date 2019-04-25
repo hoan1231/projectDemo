@@ -1,0 +1,133 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/build.css" rel="stylesheet" />
+    <title>ReportByDay</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Báo cáo thống kê theo ngày</h3>
+        </div>
+        <div class="box-body" ng-controller="ReportByDayController">
+
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="radio radio-info radio-inline">
+                                    <input type="radio" id="primary1" name="primary" ng-model="hd" value="2">
+                                    <label for="primary1">Theo hóa đơn nhập</label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    <input type="radio" id="primary2" ng-model="hd" name="primary" checked="checked" value="1">
+                                    <label for="primary1">Theo hóa đơn bán</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Từ ngày</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="fromDate">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="row">
+                      <div class="col-md-10">
+                          <div class="form-group">
+                              <label>Đến ngày</label>
+                              <div class="input-group date">
+                                  <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                  </div>
+                                  <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="toDate" >
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Chọn nhân viên</label>
+                                <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="agent">
+                                    <option value="">-- Chọn nhân viên --</option>
+                                    <option ng-repeat="x in lstAgent" value="{{x.ID}}">{{x.Name}}</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                         <button class="btn btn-primary btn-sm" style="width: 80px" ng-click="search()" id="btnSearch">Tìm kiếm</button>
+                        <button class="btn btn-warning btn-sm" style="width: 80px" ng-show="roleMenu.IsExport "ng-click=" btnexport()" id="btnExcel">Xuất excel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th style="width:7%;">STT</th>
+                                <th style="width:20%;">Mã hóa đơn</th>
+                                <th style="width:13%;">{{nameColumn}}</th>
+                                <th style="width:12%;">Tổng tiền</th>
+                                <th style="width:12%;">Nhân viên</th>
+                                <th style="width:12%;">Ngày lập hóa đơn</th>
+                              
+                            </tr>
+                        </thead>
+
+                        <tr dir-paginate="x in lst | itemsPerPage: 5">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.Id}}</td>
+                            <td>{{x.Name}}</td>
+                            <td>{{x.SumMoney}}</td>
+                            <td>{{x.CreatedBy}}</td>
+                            <td>{{x.CreatedDate.substring(6, 19)| date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                        </tr>
+
+                    </table>
+                    <dir-pagination-controls boundary-links="true"
+                                             direction-links="true">
+                    </dir-pagination-controls>
+                    
+                    <div class="bs-example">
+                        <div class="btn-toolbar text-center">
+                            <div class="btn-group btn-group-sm" id="pageAsign">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/build.css" rel="stylesheet" />
+    <title>ListMember</title>
+</head>
+<body ng-controller="ListMemberController">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Danh sách thành viên</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <table class="table table-bordered table-hover alter">
+                            <thead>
+                                <tr class="success">
+                                    <th>STT</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Họ và tên</th>
+                                    <th>Email</th>
+                                    <th>Điện thoai</th>
+                                    <th>Chi nhánh</th>
+                                    <th>Công cụ</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="x in users">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.a.Name}}</td>
+                                <td>{{x.a.UserName}}</td>
+                                <td>{{x.a.Email}}</td>
+
+                                <td>{{x.a.Phone}}</td>
+                                <td>{{x.nameCom}}</td>
+                                <td>
+                                    <a data-toggle="modal" data-backdrop="static" data-target="#modal_theme_primary" title="Thiết Lập Quyền" ng-click="setRole(x.a.ID)">
+                                        <img alt="Thiết Lập Quyền" src="/images/modules.png">
+                                    </a>
+                                    @*<span ng-click="editmember(x.a)" ng-show="(roleMenu.IsEdit)"><img alt=" sửa" src="~/images/edit.png"></span>
+                                    <span ng-click="deleteMember(x.a.ID)" ng-show="(roleMenu.IsDelete)"><img alt=" xóa" src="~/images/delete.png"></span>*@
+        </td>
+                        </table>
+                        <div class="bs-example">
+                            <div class="btn-toolbar text-center">
+                                <div class="btn-group btn-group-sm" id="pageMarked">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal_theme_primary" class="modal fade">
+            <div class="modal-dialog" style="margin-top:6%;">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h6 class="modal-title">Thiết lập quyền</h6>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group pt-15">
+                            <label class="display-block text-semibold">Chọn quyền</label>
+                            <div class="checkbox" ng-repeat="x in roles">
+                                <span class="checkbox checkbox-success" style="margin-top: 0px; margin-bottom: 0px">
+                                    <input type="checkbox" ng-model="x.check" ng-change="changeRole(x)" checked=""><label for="chkIsShow">  {{x.name.RoleName}}</label>
+                                </span>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" ng-click="saveRole()">Lưu quyền</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+    
+</body>
+</html>

@@ -1,0 +1,170 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HistoryTransaction</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Lịch sử chuyển giao hàng</h3>
+        </div>
+        <div class="box-body" ng-controller="HistoryTransactionController">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Chọn nhân viên</label>
+                        <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="agent">
+                            <option value="">-- Chọn nhân viên --</option>
+                            <option ng-repeat="x in lstAgent" value="{{x.Name}}">{{x.Name}}</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="status">
+                            <option value="">-- Chọn trạng thái --</option>
+                            <option value="0">Đang chuyển giao</option>
+                            <option value="1">Nhận hàng thành công</option>
+                            <option value="2">Hủy đơn hàng</option>
+                            <option value="3">Hàng đang về</option>
+                            <option value="4">Chuyển giao hàng thành công</option>
+                            <option value="5">Bị hủy đơn hàng</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="fromDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="toDate">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-sm" style="width: 80px" ng-click="search()" id="btnSearch">Tìm kiếm</button>
+                        <button class="btn btn-warning btn-sm" style="width: 80px" ng-click="btnExport()" id="btnExcel">Xuất excel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th style="text-align:center;">STT</th>
+                                <th style="text-align:center;">Mã sản phẩm</th>
+                                <th style="text-align:center;">Tên sản phẩm</th>
+                                <th style="text-align:center;">Số lượng chuyển</th>
+                               
+                                <th style="text-align:center;">Vận chuyển từ</th>
+                                <th style="text-align:center;">Trạng thái</th>
+                                <th style="text-align:center;">Người chuyển</th>
+                                <th style="text-align:center;">Ngày vận chuyển</th>
+                                <th style="text-align:center;">Người xác nhận</th>
+                                <th style="text-align:center;">Ngày xác nhận</th>
+
+
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="x in lst">
+                            <td style="text-align:center;">{{$index+1}}</td>
+                            <td style="text-align:center;">{{x.CatId}}</td>
+                            <td style="text-align:center;">{{x.CatName}}</td>
+                            <td style="text-align:center;">{{x.NumberCat}}</td>
+                           
+                            <td style="text-align:center;">{{x.ToAddress}}</td>
+                            <td style="text-align:center;">{{x.StatusSend}}</td>
+                            <td style="text-align:center;">{{x.CreatedBy}}</td>
+                            <td style="text-align:center;">{{x.CreatedDate}}</td>
+                            <td style="text-align:center;">{{x.ConfirmedBy}}</td>
+                            <td style="text-align:center;">{{x.ConfirmedDate}}</td>
+                           </tr>
+
+                    </table>
+                    <div class="bs-example">
+                        <div class="btn-toolbar text-center">
+                            <div class="btn-group btn-group-sm" id="pageAsign">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" ng-show="isDetail">
+                    <h3>Danh sách chi tiết</h3>
+                    <table class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th style="text-align:center;">STT</th>
+                                <th style="text-align:center;">Tên sản phẩm</th>
+                                <th style="text-align:center;">Số lượng</th>
+                                <th style="text-align:center;">Đơn giá</th>
+                                <th style="text-align:center;">VAT</th>
+                                <th style="text-align:center;">Tổng tiền</th>
+                                <th style="text-align:center;">Nhân viên</th>
+                                <th style="text-align:center;">Mã hóa đơn</th>
+                            </tr>
+                        </thead>
+
+                        <tr dir-paginate="x in lstDetailHD | itemsPerPage: 10">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.CatName}}</td>
+                            <td>{{x.CatNumber}}</td>
+                            <td>{{x.Price}}</td>
+                            <td>{{x.VAT}}</td>
+                            <td>{{x.SumMoney}}</td>
+                            <td>{{x.UserName}}</td>
+                            <td>{{x.Id}}</td>
+                        </tr>
+
+                    </table>
+                    <dir-pagination-controls boundary-links="true"
+                                             direction-links="true">
+                    </dir-pagination-controls>
+
+                    <div class="bs-example">
+                        <div class="btn-toolbar text-center">
+                            <div class="btn-group btn-group-sm" id="pageAsign">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

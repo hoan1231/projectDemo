@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HistoryLogin</title>
+</head>
+<body>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Lịch sử đăng nhập</h3>
+        </div>
+        <div class="box-body" ng-controller="HistoryLoginController">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Chọn nhân viên</label>
+                        <select class="form-control input-sm " tabindex="-1" aria-hidden="true" ng-model="agent">
+                            <option value="">-- Chọn nhân viên --</option>
+                            <option ng-repeat="x in lstAgent" value="{{x.Name}}">{{x.Name}}</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="fromDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right input-sm" placeholder="dd/mm/yyyy" id="toDate">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-sm" style="width: 80px" ng-click="search()" id="btnSearch">Tìm kiếm</button>
+                        <button class="btn btn-warning btn-sm" style="width: 80px" ng-click="btnExport()" id="btnExcel">Xuất excel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                   
+                    <table class="table table-bordered table-hover">
+                        <thead class="scroll-table">
+                            <tr class="success">
+                                <th>STT</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày đăng nhập</th>
+                               
+                            </tr>
+                        </thead>
+
+                        <tr dir-paginate="x in lst | itemsPerPage: 10">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.UserName}}</td>
+                            <td>{{x.Status}}</td>
+                            
+                            <td>{{x.DateLogin.substring(6, 19)| date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                        </tr>
+
+                    </table>
+                    <dir-pagination-controls boundary-links="true"
+                                             direction-links="true">
+                    </dir-pagination-controls>
+
+                    <div class="bs-example">
+                        <div class="btn-toolbar text-center">
+                            <div class="btn-group btn-group-sm" id="pageAsign">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

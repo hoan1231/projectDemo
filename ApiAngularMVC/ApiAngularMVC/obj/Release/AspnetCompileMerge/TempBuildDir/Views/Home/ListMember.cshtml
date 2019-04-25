@@ -1,0 +1,91 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/build.css" rel="stylesheet" />
+    <title>ListMember</title>
+</head>
+<body ng-controller="ListMemberController">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Danh sách thành viên</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <table class="table table-bordered table-hover alter">
+                            <thead>
+                                <tr class="success">
+                                    <th>STT</th>
+
+                                    <th>UserName</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Tool</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="x in users">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.UserName}}</td>
+                                <td>{{x.Email}}</td>
+
+                                <td>{{x.Phone}}</td>
+                                <td>
+                                    <a data-toggle="modal" data-backdrop="static" data-target="#modal_theme_primary" title="Thiết Lập Quyền" ng-click="setRole(x.ID)">
+                                        <img alt="Thiết Lập Quyền" src="/images/modules.png">
+                                    </a>
+                                   <a ng-click="editMember(x)" title="Sửa thông tin"><i class="icon icon-pencil7"></i></a>
+                                    <a data-toggle="modal" data-backdrop="static" title="Xóa nhân viên" data-target="#modal_theme_primary" ng-click="deleteMember(x.ID)"><i class="icon icon-bin"></i></a>
+                                </td>
+                        </table>
+                        <div class="bs-example">
+                            <div class="btn-toolbar text-center">
+                                <div class="btn-group btn-group-sm" id="pageMarked">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal_theme_primary" class="modal fade">
+            <div class="modal-dialog" style="margin-top:6%;">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h6 class="modal-title">Thiết lập quyền</h6>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group pt-15">
+                            <label class="display-block text-semibold">Chọn quyền</label>
+                            <div class="checkbox" ng-repeat="x in roles">
+                                <span class="checkbox checkbox-success" style="margin-top: 0px; margin-bottom: 0px">
+                                    <input type="checkbox" ng-model="x.check" ng-change="changeRole(x)" checked=""><label for="chkIsShow">  {{x.name.RoleName}}</label>
+                                </span>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" ng-click="saveRole()">Lưu quyền</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+    
+</body>
+</html>

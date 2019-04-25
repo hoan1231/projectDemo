@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SetPermissions</title>
+    <link href="~/Content/build.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="box box-danger" ng-controller="SetPermissionController">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Thiết lập quyền menu <span id="txtRoleName">Administrator</span></h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3 col-xs-6 col-lg-2 col-sm-4">
+                    <div class="form-group">
+                        <label>Nhóm module</label>
+                        <select id="ddlMenu" class="form-control input-sm select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true" ng-model="parentId" ng-change="changeMenu()">
+                            <option value="">-Chọn-</option>
+                            <option ng-repeat="x in menuParent" value="{{x.MenuId}}">{{x.MenuName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-sm" id="btnUpdate" ng-click="updateRoles()">Cập Nhật</button>
+             
+                    </div>
+                </div>
+            </div>
+            <table id="tblMenu" class="table table-bordered table-hover">
+                <tbody>
+                    <tr class="success">
+                        <th>STT</th>
+                        <th>
+                            Chức năng
+                        </th>
+                        <th>
+                            Quyền xem
+                        </th>
+                        <th>
+                            Quyền thêm
+                        </th>
+                        <th>Quyền sửa</th>
+                        <th>
+                            Quyền xóa
+                        </th>
+                        <th>
+                            Quyền in
+                        </th>
+                        <th>
+                            Quyền xuất file
+                        </th>
+                        <th>
+                            Hoạt động
+                        </th>
+                        <th></th>
+                    </tr>
+                </tbody>
+                <tbody id="tbdMenu">
+                    <tr ng-repeat="x in lstRoleMenus">
+                        <td>{{$index+1}}</td>
+                        <td>{{x.MenuName}}</td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsShow" checked=""><label for="chkIsShow"></label></span></td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsAdd" checked=""><label for="chkIsAdd"></label></span></td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsEdit" checked=""><label for="chkIsEdit"></label></span></td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsDelete" checked=""><label for="chkIsDelete"></label></span></td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsPrint" checked=""><label for="chkIsPrint"></label></span></td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsExport" checked=""><label for="chkIsExport"></label></span></td>
+                        <td><span class="checkbox checkbox-success" style="margin-top:0px; margin-bottom:0px"><input type="checkbox" ng-model="x.b.IsEnable" checked=""><label for="chkIsEnable"></label></span></td>
+
+                        <td><span class="checkbox checkbox-danger" style="margin-top:0px; margin-bottom:0px"><input ng-model="x.b.IsAll" ng-change="changeCheckAll(x.b.IsAll,$index)" type="checkbox" checked="">
+                        <label for="chkIsAll1"></label></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="bs-example">
+                <div class="btn-toolbar text-center">
+                    <div class="btn-group btn-group-sm" id="pageMarked"><button type="button" onclick="pageMarked.prev(select_pageMarked);" class="btn btn-primary">« Prev</button><select id="select_pageMarked" class="btn input-sm pg-normal" style="border: 1px solid #8F9394;" onchange="pageMarked.selectChangePage(pageMarked, this);"><option value="1">1</option></select><button type="button" onclick="pageMarked.next(select_pageMarked);" class="btn btn-primary">Next »</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
